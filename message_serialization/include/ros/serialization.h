@@ -173,7 +173,7 @@ namespace ros
     {
       return Serializer<T>::serializedLength(t);
     }
-
+//全特化模板类，基本数据类型的序列化
 #define ROS_CREATE_SIMPLE_SERIALIZER(Type)                      \
   template <>                                                   \
   struct Serializer<Type>                                       \
@@ -861,12 +861,16 @@ namespace ros
     {
       SerializedMessage m;
       uint32_t len = serializationLength(message);
+      // 4 bytes for the length
       m.num_bytes = len + 4;
       m.buf.reset(new uint8_t[m.num_bytes]);
 
       OStream s(m.buf.get(), (uint32_t)m.num_bytes);
+      //先序列化长度
       serialize(s, (uint32_t)m.num_bytes - 4);
+      //获取真正的数据起始位置
       m.message_start = s.getData();
+      //序列化数据
       serialize(s, message);
 
       return m;

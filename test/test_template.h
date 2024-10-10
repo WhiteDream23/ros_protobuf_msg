@@ -3,7 +3,7 @@
 template <class T1, class T2>
 class Test {
  public:
-  Test(T1 a, T2 b) : a_(a), b_(b) { std::cout << "模板化" << std::endl; }
+  Test(T1 a, T2 b) : a_(a), b_(b) { std::cout << "putong" << std::endl; }
 
  private:
   T1 a_;

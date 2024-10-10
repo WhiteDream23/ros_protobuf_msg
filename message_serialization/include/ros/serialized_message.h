@@ -39,11 +39,14 @@ namespace ros
 class ROSCPP_SERIALIZATION_DECL SerializedMessage
 {
 public:
+  //序列化使用，存储字节流
   boost::shared_array<uint8_t> buf;
   size_t num_bytes;
   uint8_t* message_start;
 
+  //反序列化后的对象
   boost::shared_ptr<void const> message;
+  //反序列化后的对象类型
   const std::type_info* type_info;
 
   SerializedMessage()
